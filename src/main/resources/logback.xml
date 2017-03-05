@@ -1,0 +1,40 @@
+<configuration scan="false" scanPeriod="60 seconds" debug="false">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{12} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>TRACE</level>
+        </filter>
+
+        <!-- 可让每天产生一个日志文件，最多 7 个，自动回滚 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina.home}/logs/biz-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{12} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 异步输出 -->
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>512</queueSize>
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref="RollingFile"/>
+    </appender>
+
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.apache" level="WARN"/>
+
+    <root level="info">
+        <appender-ref ref="ASYNC"/>
+    </root>
+</configuration>

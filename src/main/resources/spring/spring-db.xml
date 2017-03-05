@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="commentTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="commentDataSource"/>
+    </bean>
+    <bean id="commentDataSource" class="com.github.mybatis.spring.DynamicDataSource">
+        <property name="configName" value="db-datax-console"/>
+    </bean>
+    <!-- define the SqlSessionFactory -->
+    <bean id="commentSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="commentDataSource"/>
+        <property name="typeAliasesPackage" value="com.datax.console.entity"/>
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+    </bean>
+    <!-- scan for mapper and let them be autowired -->
+    <bean class="com.github.mybatis.spring.ScannerConfigurer">
+        <property name="basePackage" value="com.datax.console.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="commentSqlSessionFactory"/>
+    </bean>
+</beans>

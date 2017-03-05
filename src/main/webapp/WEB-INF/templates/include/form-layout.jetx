@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${title}</title>
+  <link href="//static.foneshare.cn/oss/datatables.min.css" rel="stylesheet" type="text/css"/>
+  #tag layout_block_default("headContent")#end
+  <style>
+    input.error {
+      border: 1px solid red;
+    }
+
+    label.error {
+      background: url("//static.foneshare.cn/oss/images/unchecked.gif") no-repeat 0px 0px;
+      padding-left: 16px;
+      padding-bottom: 2px;
+      font-weight: bold;
+      color: #EA5200;
+    }
+
+    label.checked {
+      background: url("//static.foneshare.cn/oss/images/checked.gif") no-repeat 0px 0px;
+    }
+  </style>
+</head>
+<body>
+  #include("nav.inc.jetx")
+<div class="container-fluid">
+  <div class="row">
+    #include("alert.inc.jetx")
+    #tag layout_block_default("bodyContent")#end
+  </div>
+</div>
+<script src="//static.foneshare.cn/oss/datatables.min.js"></script>
+<script src="//static.foneshare.cn/oss/jquery/jquery.validate.min.js"></script>
+<script src="//static.foneshare.cn/oss/jquery/jquery.validate-messages_cn.js"></script>
+<script src="//static.foneshare.cn/oss/jquery/additional-methods.min.js"></script>
+#tag layout_block_default("scriptContent")#end
+</body>
+</html>

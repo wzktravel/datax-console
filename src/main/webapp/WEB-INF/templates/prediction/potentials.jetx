@@ -1,0 +1,72 @@
+#set(title="预测结果")
+#set(navbar="potentials")
+#tag layout_block("bodyContent")
+<div class="container-fluid">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8">
+    <div class="panel panel-info">
+      <div class="panel-heading"><h3 class="panel-title">潜在客户</h3></div>
+      <div class="panel-body">
+        <table class="table" id="dataTable">
+          <thead>
+          <tr>
+            <th>企业名称</th>
+            <th>企业官网</th>
+            <th>得分</th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+#end
+#tag layout_block("scriptContent")
+<script>
+  $(document).ready(function () {
+    var results = ${results};
+    var table = $("#dataTable").DataTable({
+      "stateSave": true,
+      "processing": false,
+      "serverSide": false,
+      "search": {
+        "regex": true
+      },
+      "order": [[0, 'asc']],
+      "data" : results,
+      columns: [
+        {data: 'company.name', render: function (data, type, row, meta) {
+          var companyId = row.company.id;
+          var companyName = row.company.name;
+          var modelId = row.id;
+          return ["<a target='_BLANK' href='${CONTEXT_PATH}", "/prediction/model/", modelId, "/company/", companyId, "'>", companyName, "</a>"].join("");
+        }},
+        {data: 'company.website'},
+        {
+          data: 'score'
+        }],
+      "iDisplayLength": 25,
+      "sPaginationType": "full_numbers",
+      "language": {
+        "processing": "加载中...",
+        "lengthMenu": "显示 _MENU_ 项结果",
+        "zeroRecords": "没有匹配结果",
+        "emptyTable": "没有数据",
+        "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+        "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
+        "infoFiltered": "(由 _MAX_ 项结果过滤)",
+        "infoPostFix": "",
+        "search": "搜索:",
+        "url": "",
+        "paginate": {
+          "first": "首页",
+          "previous": "上页",
+          "next": "下页",
+          "last": "末页"
+        }
+      }
+    });
+  });
+</script>
+#end
+#include("/include/layout.jetx")

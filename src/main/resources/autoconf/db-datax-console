@@ -1,0 +1,3 @@
+masterUrl=jdbc:mysql://localhost:3306/datax?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true
+username=datax
+password=dataxyz

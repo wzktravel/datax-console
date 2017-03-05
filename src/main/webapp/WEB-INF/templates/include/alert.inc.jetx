@@ -1,0 +1,11 @@
+<div id="alert-div" class="container alert alert-warning alert-dismissible navbar-fixed-top hidden" role="alert">
+  <button id="alert-hidden" type="button" class="close"><span aria-hidden="true">&times;</span></button>
+  <div id="alert-msg" class="text-center"></div>
+</div>
+<script>
+  (function(){
+    document.getElementById("alert-hidden").onclick = function() {
+      this.parentNode.className += " hidden";
+    }
+  })()
+</script>
