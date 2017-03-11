@@ -19,8 +19,8 @@
   }
 </style>
 <div class="container-fluid">
-  <div class="col-lg-2"></div>
-  <div class="col-lg-8">
+  <div class="col-lg-1"></div>
+  <div class="col-lg-10">
     <div class="company-view">
       <h1>${result.company.name}</h1>
       <div class="company-basic-view">

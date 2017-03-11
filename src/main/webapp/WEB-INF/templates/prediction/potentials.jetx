@@ -2,8 +2,8 @@
 #set(navbar="potentials")
 #tag layout_block("bodyContent")
 <div class="container-fluid">
-  <div class="col-lg-2"></div>
-  <div class="col-lg-8">
+  <div class="col-lg-1"></div>
+  <div class="col-lg-10">
     <div class="panel panel-info">
       <div class="panel-heading"><h3 class="panel-title">潜在客户</h3></div>
       <div class="panel-body">

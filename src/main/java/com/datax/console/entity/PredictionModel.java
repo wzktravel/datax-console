@@ -10,6 +10,7 @@ import lombok.Data;
 public class PredictionModel {
 
   private String id;
+  private String name;
   private String userId;
   private String date;
 

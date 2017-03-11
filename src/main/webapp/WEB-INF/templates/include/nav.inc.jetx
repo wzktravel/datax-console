@@ -1,12 +1,10 @@
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default container-fluid" role="navigation">
   <div class="navbar-header">
     <a class="navbar-brand" href="${CONTEXT_PATH}/">DataX</a>
   </div>
-  <!--
   <div>
     <ul class="nav navbar-nav" id="navbar">
-      <li #if(navbar=="home")class="active"#end><a href="${CONTEXT_PATH}/">配置管理</a></li>
+      <li #if(navbar=="overview")class="active"#end><a href="${CONTEXT_PATH}/overview">概览</a></li>
     </ul>
   </div>
-  -->
 </nav>

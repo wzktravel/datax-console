@@ -1,0 +1,23 @@
+#set(title="概览")
+#set(navbar="overview")
+#tag layout_block("bodyContent")
+<div class="container-fluid">
+  <div class="col-lg-1"></div>
+  <div class="col-lg-10">
+    <div class="panel panel-info">
+      <div class="panel-heading"><h3 class="panel-title">模型列表</h3></div>
+      <div class="panel-body">
+        <ul>
+          #for (model : models)
+          <li><a href="${CONTEXT_PATH}/prediction/model/${model.id}">${model.name}</a></li>
+          #end
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+#end
+#tag layout_block("scriptContent")
+
+#end
+#include("/include/layout.jetx")

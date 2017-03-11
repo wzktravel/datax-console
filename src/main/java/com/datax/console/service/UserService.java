@@ -1,5 +1,9 @@
 package com.datax.console.service;
 
+import com.datax.console.entity.User;
+import com.datax.console.mapper.UserMapper;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -11,5 +15,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class UserService {
+
+  private final UserMapper userMapper;
+
+  @Autowired
+  public UserService(UserMapper userMapper) {
+    this.userMapper = userMapper;
+  }
+
+  public User getById(String id) {
+    return userMapper.findById(id);
+  }
 
 }
