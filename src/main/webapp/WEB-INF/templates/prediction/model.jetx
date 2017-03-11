@@ -1,0 +1,9 @@
+#set(title="预测结果")
+#set(navbar="potentials")
+#tag layout_block("bodyContent")
+
+#end
+#tag layout_block("scriptContent")
+
+#end
+#include("/include/layout.jetx")

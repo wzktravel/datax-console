@@ -1,13 +1,10 @@
 package com.datax.console.controller;
 
-import com.google.common.base.Strings;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
-import com.datax.console.entity.PredictionModel;
 import com.datax.console.entity.PredictionResult;
 import com.datax.console.helper.DataxContext;
-import com.datax.console.service.PredictionModelService;
+import com.datax.console.helper.DataxUtils;
 import com.datax.console.service.PredictionResultService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -26,61 +24,43 @@ import java.util.List;
 @RequestMapping("/prediction")
 public class PredictionController {
 
-  private final PredictionModelService modelService;
   private final PredictionResultService resultService;
 
   @Autowired
-  public PredictionController(PredictionModelService modelService,
-                              PredictionResultService resultService) {
-    this.modelService = modelService;
+  public PredictionController(PredictionResultService resultService) {
     this.resultService = resultService;
   }
 
   @RequestMapping("/model/{id}")
-  public String model(@PathVariable("id") String id,
-                      Model model) {
-    if (Strings.isNullOrEmpty(id)) {
-      //TODO report error msg
-      return "error";
-    }
-    PredictionModel predictionModel = modelService.getById(id);
-    model.addAttribute("model", predictionModel);
-    return "prediction/model";
+  public String model(@PathVariable String id) {
+    return "redirect:/prediction/model/" + id + "/potentials";
   }
 
   @RequestMapping("/model/{id}/potentials")
-  public String potentials(@PathVariable("id") String id,
-                           Model model) {
-    if (Strings.isNullOrEmpty(id)) {
-      //TODO report error msg
-      return "error";
-    }
+  public String potentials(@PathVariable String id, Model m, RedirectAttributes r) {
     List<PredictionResult> results = resultService.getResultsByModel(id);
+    if (DataxUtils.isNullOrEmpty(results)) {
+      r.addFlashAttribute("message", "未找到此模型对应的结果。");
+      return "redirect:/overview";
+    }
+
     SimplePropertyPreFilter filter = DataxContext.getPredictionResultCompanyFilter();
     String json = JSON.toJSONString(results, filter);
-    model.addAttribute("results", Strings.isNullOrEmpty(json) ? "[]" : json);
+    m.addAttribute("results", json);
     return "prediction/potentials";
   }
 
   @RequestMapping("/model/{modelId}/company/{companyId}")
-  public String companyDetail(@PathVariable("modelId") String modelId,
-                       @PathVariable("companyId") String companyId,
-                       Model model) {
-    if (Strings.isNullOrEmpty(modelId)) {
-      //TODO report error msg
-      return "error";
-    }
-    if (Strings.isNullOrEmpty(companyId)) {
-      //TODO report error msg
-      return "error";
-    }
-
+  public String companyDetail(@PathVariable String modelId,
+                              @PathVariable String companyId,
+                              Model m, RedirectAttributes r) {
     PredictionResult result = resultService.getResult(modelId, companyId);
-    model.addAttribute("result", result);
-    //TODO show
+    if (result == null) {
+      r.addFlashAttribute("message", "找不到此公司详情。");
+      return "redirect:/overview";
+    }
+    m.addAttribute("result", result);
     return "prediction/company_detail";
-
   }
-
 
 }

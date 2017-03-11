@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${title}</title>
-  <link href="//static.foneshare.cn/oss/datatables.min.css" rel="stylesheet" type="text/css"/>
+  <link href="http://omfzlnj8e.bkt.clouddn.com/style/datatables.min.css" rel="stylesheet" type="text/css"/>
   #tag layout_block_default("headContent")#end
   <style>
+    * {
+      box-sizing: border-box;
+      word-break: break-all;
+      white-space: normal;
+      word-wrap: break-word;
+    }
     .table th {
       text-align: center
     }
-
     .table td {
       text-align: left
     }
-
     td.highlight {
       font-weight: bold;
       color: red;
@@ -31,7 +35,7 @@
     #tag layout_block_default("bodyContent")#end
   </div>
 </div>
-<script src="//static.foneshare.cn/oss/datatables.min.js"></script>
+<script src="http://omfzlnj8e.bkt.clouddn.com/js/datatables.min.js"></script>
 #tag layout_block_default("scriptContent")#end
 </body>
 </html>
