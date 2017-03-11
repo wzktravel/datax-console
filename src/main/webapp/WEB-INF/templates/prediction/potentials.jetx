@@ -38,7 +38,7 @@
         {data: 'company.name', render: function (data, type, row, meta) {
           var companyId = row.company.id;
           var companyName = row.company.name;
-          var modelId = row.id;
+          var modelId = row.modelId;
           return ["<a target='_BLANK' href='${CONTEXT_PATH}", "/prediction/model/", modelId, "/company/", companyId, "'>", companyName, "</a>"].join("");
         }},
         {data: 'company.website'},
