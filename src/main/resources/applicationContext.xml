@@ -14,6 +14,8 @@
     <context:annotation-config/>
 
     <import resource="classpath:spring/spring-db.xml"/>
+    <import resource="classpath:spring/spring-guava.xml"/>
+    <import resource="classpath:spring/spring-shiro.xml"/>
 
     <!-- 使用全局的日期格式化 -->
     <bean id="conversionService"
@@ -39,5 +41,9 @@
 
     <!-- 启用@AspectJ注解 -->
     <aop:aspectj-autoproxy/>
+
+    <beans profile="default">
+        <context:property-placeholder ignore-resource-not-found="true" location="classpath:application.properties"/>
+    </beans>
 
 </beans>

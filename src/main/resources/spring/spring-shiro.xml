@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <description>Shiro安全配置</description>
+
+    <!-- Shiro Filter -->
+    <bean id="shiroFilter" class="com.github.shiro.support.MyShiroFilterFactoryBean"
+          p:securityManager-ref="securityManager"
+          p:loginUrl="${casServerUrlPrefix}/login?service=${casService}"
+          p:successUrl="/"
+          p:unauthorizedUrl="/unauthorized">
+        <property name="filters">
+            <util:map>
+                <entry key="casFilter" value-ref="casFilter"/>
+            </util:map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                /shiro-cas = casFilter
+                /admin/** = roles[admin]
+                /api/** = anon
+                /static/** = anon
+                /unauthorized = anon
+                /ping = anon
+                /register = anon
+                /login = authc
+                /logout = anon
+                /updateConfig = anon
+                /** = user
+            </value>
+        </property>
+    </bean>
+
+    <bean id="casFilter" class="com.github.shiro.support.MyCasFilter" p:failureUrl="/unauthorized"/>
+
+    <bean id="casRealm" class="com.github.shiro.support.ShiroCasRealm"
+          p:defaultRoles="user"
+          p:defaultPermissions=""
+          p:roleAttributeNames="roles"
+          p:permissionAttributeNames="permissions"
+          p:casService="${casService}"
+          p:casServerUrlPrefix="${casRealmServerUrlPrefix}"/>
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" p:realm-ref="casRealm" p:subjectFactory-ref="casSubjectFactory" p:cacheManager-ref="shiroCache"/>
+
+    <!-- 如果要实现cas的remember me的功能，需要用到下面这个bean，并设置到securityManager的subjectFactory中 -->
+    <bean id="casSubjectFactory" class="org.apache.shiro.cas.CasSubjectFactory"/>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean" p:staticMethod="org.apache.shiro.SecurityUtils.setSecurityManager" p:arguments-ref="securityManager"/>
+
+    <bean id="shiroCache" class="com.github.shiro.support.SpringCacheManagerWrapper" p:cacheManager-ref="cacheManager"/>
+
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+</beans>
