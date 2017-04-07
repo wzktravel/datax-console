@@ -41,7 +41,7 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
     log.info("Current URL: {}", url);
 
     if (toValidate(url)) {
-      //判斷是否已登录
+      //判断是否已登录
       User user = (User)request.getSession().getAttribute("user");
       if (user == null) {
         log.info(">>> No session, please login. <<<");

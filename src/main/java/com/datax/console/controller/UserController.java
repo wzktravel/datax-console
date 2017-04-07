@@ -1,5 +1,6 @@
 package com.datax.console.controller;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 
 import com.datax.console.entity.PredictionModel;
@@ -50,19 +51,38 @@ public class UserController {
     return "user/login";
   }
 
+  @RequestMapping("/logout")
+  public String logout(HttpSession session) {
+    User user = (User)session.getAttribute("user");
+    if (user != null) {
+      session.removeAttribute("user");
+    }
+    return "redirect:/login";
+  }
+
+  @RequestMapping("/login2")
+  public String login2() {
+    return "user/login2";
+  }
+
   @RequestMapping("/changepassword")
   public String changePassword() {
     return "user/changepassword";
   }
 
   @RequestMapping(value = "/validateRegister", method = RequestMethod.POST)
-  public String validateRegister(Model m, RedirectAttributes r) {
-    return "success";
+  public Map validateRegister(User user, Model m, RedirectAttributes r, HttpSession session) {
+    log.info("register : {}", user);
+
+    return ImmutableMap.of("status", "1");
   }
 
   @RequestMapping(value = "/validateLogin", method = RequestMethod.POST)
   @ResponseBody
   public Map validateLogin(String email, String password, Model m, RedirectAttributes r, HttpSession session) {
+    if (Strings.isNullOrEmpty(email) || Strings.isNullOrEmpty(password)) {
+      return ImmutableMap.of("status", "0", "message", "邮箱地址或密码不能为空。");
+    }
     //TODO email和password需要加密处理
     User user = userService.getByEmail(email);
     if (user == null) {

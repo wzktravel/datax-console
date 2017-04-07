@@ -12,28 +12,16 @@
     input.error {
       border: 1px solid red;
     }
-
     label.error {
-      background: url("http://omfzlnj8e.bkt.clouddn.com/images/unchecked.gif") no-repeat 0px 0px;
-      padding-left: 16px;
-      padding-bottom: 2px;
-      font-weight: bold;
+      font-weight: normal;
       color: #EA5200;
     }
-
     label.checked {
-      background: url("http://omfzlnj8e.bkt.clouddn.com/images/checked.gif") no-repeat 0px 0px;
     }
   </style>
 </head>
 <body>
-  #include("nav.inc.jetx")
-<div class="container-fluid">
-  <div class="row">
-    #include("alert.inc.jetx")
-    #tag layout_block_default("bodyContent")#end
-  </div>
-</div>
+#tag layout_block_default("bodyContent")#end
 <script src="http://omfzlnj8e.bkt.clouddn.com/js/datatables.min.js"></script>
 <script src="http://omfzlnj8e.bkt.clouddn.com/js/jquery.validate.min.js"></script>
 <script src="http://omfzlnj8e.bkt.clouddn.com/js/jquery.validate-messages_cn.js"></script>
