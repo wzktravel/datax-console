@@ -1,5 +1,6 @@
 package com.datax.console.helper;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +10,8 @@ import java.util.Map;
  */
 public class DataxUtils {
 
-  public static boolean isNullOrEmpty(List list) {
-    return list == null || list.isEmpty();
+  public static boolean isNullOrEmpty(Collection c) {
+    return c == null || c.isEmpty();
   }
 
   public static boolean isNullOrEmpty(Map map) {

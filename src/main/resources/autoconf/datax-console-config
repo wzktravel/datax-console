@@ -1,1 +1,3 @@
 prediction.result.filter=id,name
+
+ignoredUrls=/login,/validateLogin,/validateRegister,/register,/changepassword,.css,.gif,.js,.png,.jpg

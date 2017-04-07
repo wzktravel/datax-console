@@ -25,4 +25,11 @@
 
     <mvc:default-servlet-handler/>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean id="sessionCheckInterceptor" class="com.datax.console.interceptor.SessionCheckInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>

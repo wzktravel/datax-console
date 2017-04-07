@@ -71,6 +71,7 @@ CREATE TABLE `user` (
   `website` varchar(255) DEFAULT NULL,
   `mobile` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
+  `locked` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

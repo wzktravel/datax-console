@@ -1,0 +1,82 @@
+#set(title="用户登录")
+#set(navbar="login")
+#tag layout_block("bodyContent")
+<div class="container-fluid">
+  <div id="alert-div" class="container alert alert-warning alert-dismissible hidden" role="alert">
+    <button id="alert-hidden" type="button" class="close"><span aria-hidden="true">&times;</span></button>
+    <div id="alert-msg" class="text-center"></div>
+  </div>
+  <script>
+    (function(){
+      document.getElementById("alert-hidden").onclick = function() {
+        this.parentNode.className += " hidden";
+      }
+    })()
+  </script>
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label for="login-username" class="col-sm-2 control-label">邮箱地址</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="login-email" placeholder="Email">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="login-password" class="col-sm-2 control-label">密码</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" id="login-password" placeholder="Password">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="button" class="btn btn-default" id="login-submit">登录</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+#end
+#tag layout_block("scriptContent")
+<script>
+  (function ($) {
+    var loginCheckUrl = "${CONTEXT_PATH}/validateLogin";
+
+    function alertMsg(msg) {
+      $("#alert-msg").text(msg);
+      $("#alert-div").removeClass("hidden");
+    }
+
+    $(document).ready(function () {
+      $("#login-submit").on("click", function () {
+
+        var email = $("#login-email").val();
+        var password = $("#login-password").val();
+
+        if (email == "" || password == "") {
+          alertMsg("邮箱地址或密码不能为空!")
+          return;
+        }
+
+        $.ajax({
+                 url: loginCheckUrl,
+                 dataType: "json",
+                 type: 'POST',
+                 data: {
+                   "email" : email,
+                   "password" : password
+                 },
+                 success: function (result) {
+                   if (result.status == "1") {
+                     window.location.href = "${CONTEXT_PATH}/overview";
+                   } else {
+                     alertMsg(result.message);
+                   }
+                 }
+               });
+      })
+    });
+  }) (jQuery)
+</script>
+#end
+#include("/include/form-layout.jetx")

@@ -27,4 +27,8 @@ public class UserService {
     return userMapper.findById(id);
   }
 
+  public User getByEmail(String email) {
+    return userMapper.getByEmail(email);
+  }
+
 }
