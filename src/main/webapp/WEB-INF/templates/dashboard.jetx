@@ -1,0 +1,105 @@
+#set(title="首页")
+#set(navbar="dashboard")
+#tag layout_block("bodyContent")
+<style>
+
+  .page-gap {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 3px solid #ddd;
+    border-bottom: 3px solid #ddd;
+  }
+
+  .num-show {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+
+
+  .company-basic-row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+  .company-prop-label {
+    color: #aaa;
+  }
+  .company-prop-info {
+    display: inline-block;
+    margin-left: 5px;
+    color: #484848;
+    min-width: 150px;
+    max-width: 500px;
+    vertical-align: top;
+  }
+</style>
+<div class="container-fluid">
+  <div class="col-lg-1"></div>
+  <div class="col-lg-10">
+    <div class="">
+      <div><h3>线索概览</h3></div>
+      <div>
+      <ul class="nav page-gap" >
+        <li class="col-lg-3 num-show">
+          <p class="company-basic-row">未分配</p>
+          <span class=""><em>5000</em>个</span>
+        </li>
+        <li class="col-lg-3 num-show ">
+          <p class="company-basic-row">待处理</p>
+          <span class=""><em>2026</em>个</span>
+        </li>
+        <li class="col-lg-3 num-show ">
+        <p class="company-basic-row">转客户 </p>
+        <span class=""><em>3417</em>个</span>
+        </li>
+      </ul>
+      </div>
+      <div class="">
+        <div class="">
+          <span class="company-prop-label">预测得分：</span>
+          <span class="company-prop-info">${result.score}</span>
+        </div>
+        <div class="company-basic-row">
+          <span class="company-prop-label">注册资本：</span>
+          <span class="company-prop-info">${result.company.registeredCapital}</span>
+          <span class="company-prop-label">所属行业：</span>
+          <span class="company-prop-info">${result.company.mainCategory}</span>
+        </div>
+        <div class="company-basic-row">
+          <span class="company-prop-label">成立时间：</span>
+          <span class="company-prop-info">${result.company.registeredDate}</span>
+          <span class="company-prop-label">企业官网：</span>
+          <span class="company-prop-info">${result.company.website}</span>
+        </div>
+        <div class="company-basic-row">
+          <span class="company-prop-label">企业地址：</span>
+          <span class="company-prop-info">${result.company.address}</span>
+        </div>
+      </div>
+    </div>
+
+    <ul class="nav nav-tabs" style="margin-top: 20px;">
+      <li class="active"><a href="#contact" data-toggle="tab">联系人</a></li>
+      <li><a href="#salesclue" data-toggle="tab">线索汇总</a></li>
+      <li><a href="#activity" data-toggle="tab">企业动态</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade in active" id="contact">
+        联系人
+      </div>
+      <div class="tab-pane fade in" id="salesclue">
+        <p>线索汇总</p>
+      </div>
+      <div class="tab-pane fade" id="activity">
+        <p>企业动态</p>
+      </div>
+    </div>
+  </div>
+</div>
+#end
+#tag layout_block("scriptContent")
+<script>
+</script>
+#end
+#include("/include/layout.jetx")
