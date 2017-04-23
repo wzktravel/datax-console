@@ -1,82 +1,118 @@
-#set(title="用户登录")
-#set(navbar="login")
-#tag layout_block("bodyContent")
-<div class="container-fluid">
-  <div id="alert-div" class="container alert alert-warning alert-dismissible hidden" role="alert">
-    <button id="alert-hidden" type="button" class="close"><span aria-hidden="true">&times;</span></button>
-    <div id="alert-msg" class="text-center"></div>
-  </div>
-  <script>
-    (function(){
-      document.getElementById("alert-hidden").onclick = function() {
-        this.parentNode.className += " hidden";
-      }
-    })()
-  </script>
-  <div class="col-lg-2"></div>
-  <div class="col-lg-8">
-    <div class="form-horizontal">
-      <div class="form-group">
-        <label for="login-username" class="col-sm-2 control-label">邮箱地址</label>
-        <div class="col-sm-10">
-          <input type="email" class="form-control" id="login-email" placeholder="Email">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>登录</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+  <link rel="stylesheet" href="${CONTEXT_PATH}/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${CONTEXT_PATH}/assets/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="${CONTEXT_PATH}/assets/css/form-elements.css">
+  <link rel="stylesheet" href="${CONTEXT_PATH}/assets/css/login.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Favicon and touch icons -->
+  <link rel="shortcut icon" href="${CONTEXT_PATH}/assets/ico/favicon.png">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="${CONTEXT_PATH}/assets/ico/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${CONTEXT_PATH}/assets/ico/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${CONTEXT_PATH}/assets/ico/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="${CONTEXT_PATH}/assets/ico/apple-touch-icon-57-precomposed.png">
+
+  <style>
+    input.error {
+      border: 1px solid red;
+    }
+    label.error {
+      font-weight: normal;
+      color: #EA5200;
+    }
+    label.checked {
+    }
+  </style>
+</head>
+
+<body>
+<!-- Top content -->
+<div class="top-content">
+  <div class="inner-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 text">
+          <h1>登录<strong>DataX</strong></h1>
         </div>
       </div>
-      <div class="form-group">
-        <label for="login-password" class="col-sm-2 control-label">密码</label>
-        <div class="col-sm-10">
-          <input type="password" class="form-control" id="login-password" placeholder="Password">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 form-box">
+          <div class="form-top">
+            <div class="form-top-left">
+              <h3>登录</h3>
+              <p>使用邮箱和密码进行登录：</p>
+            </div>
+            <div class="form-top-right">
+              <i class="fa fa-key"></i>
+            </div>
+          </div>
+          <div class="form-bottom">
+            <form role="form" action="" method="post" class="login-form" id="login-form">
+              <div class="form-group">
+                <label class="sr-only" for="form_email">邮箱地址</label>
+                <input type="email" name="form_email" placeholder="邮箱..." class="form-email form-control" id="form_email">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="form_password">密码</label>
+                <input type="password" name="form_password" placeholder="密码..." class="form-password form-control" id="form_password">
+              </div>
+              <button type="submit" class="btn">登录</button>
+              <label id="form_validate_message" class="error" style="display: none;"></label>
+            </form>
+          </div>
         </div>
       </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="button" class="btn btn-default" id="login-submit">登录</button>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 social-login">
+          <h3>...或者使用以下登录方式：</h3>
+          <div class="social-login-buttons">
+            <a class="btn btn-link-1 btn-link-1-facebook" href="#">
+              <i class="fa fa-facebook"></i> Facebook
+            </a>
+            <a class="btn btn-link-1 btn-link-1-twitter" href="#">
+              <i class="fa fa-twitter"></i> Twitter
+            </a>
+            <a class="btn btn-link-1 btn-link-1-google-plus" href="#">
+              <i class="fa fa-google-plus"></i> Google Plus
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-#end
-#tag layout_block("scriptContent")
+
 <script>
-  (function ($) {
-    var loginCheckUrl = "${CONTEXT_PATH}/validateLogin";
-
-    function alertMsg(msg) {
-      $("#alert-msg").text(msg);
-      $("#alert-div").removeClass("hidden");
-    }
-
-    $(document).ready(function () {
-      $("#login-submit").on("click", function () {
-
-        var email = $("#login-email").val();
-        var password = $("#login-password").val();
-
-        if (email == "" || password == "") {
-          alertMsg("邮箱地址或密码不能为空!")
-          return;
-        }
-
-        $.ajax({
-                 url: loginCheckUrl,
-                 dataType: "json",
-                 type: 'POST',
-                 data: {
-                   "email" : email,
-                   "password" : password
-                 },
-                 success: function (result) {
-                   if (result.status == "1") {
-                     window.location.href = "${CONTEXT_PATH}/overview";
-                   } else {
-                     alertMsg(result.message);
-                   }
-                 }
-               });
-      })
-    });
-  }) (jQuery)
+  var contextPath = "${CONTEXT_PATH}";
 </script>
-#end
-#include("/include/form-layout.jetx")
+
+<!-- Javascript -->
+<script src="${CONTEXT_PATH}/assets/js/jquery-1.11.1.min.js"></script>
+<script src="${CONTEXT_PATH}/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="${CONTEXT_PATH}/assets/js/jquery.backstretch.min.js"></script>
+<script src="${CONTEXT_PATH}/assets/js/jquery.validate.min.js"></script>
+<script src="${CONTEXT_PATH}/assets/js/login.js"></script>
+
+<!--[if lt IE 10]>
+<script src="${CONTEXT_PATH}/assets/js/placeholder.js"></script>
+<![endif]-->
+
+</body>
+</html>

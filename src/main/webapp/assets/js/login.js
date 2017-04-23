@@ -16,10 +16,10 @@ jQuery(document).ready(function () {
       }
     },
     messages: {
-      form_email: "请输入一个正确的邮箱",
+      form_email: "请输入有效的电子邮件地址",
       form_password: {
         required: "请输入密码",
-        minlength: "密码长度不能小于 6 个字母"
+        minlength: "密码长度不能小于6个字符"
       }
     },
     submitHandler: function() {
