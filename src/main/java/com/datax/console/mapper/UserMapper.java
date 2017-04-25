@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface UserMapper extends ICrudMapper<User> {
 
-  @Select("select * from user where username=#{email}")
+  @Select("select * from user where email=#{email}")
   User getByEmail(String email);
 
   @Select("select * from user where mobile=#{mobile}")

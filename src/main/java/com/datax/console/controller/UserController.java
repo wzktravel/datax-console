@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableMap;
 
 import com.datax.console.entity.PredictionModel;
 import com.datax.console.entity.User;
+import com.datax.console.helper.DataxUtils;
 import com.datax.console.service.PredictionModelService;
 import com.datax.console.service.UserService;
 
@@ -60,21 +61,32 @@ public class UserController {
     return "redirect:/login";
   }
 
-  @RequestMapping("/login2")
-  public String login2() {
-    return "user/login2";
-  }
-
   @RequestMapping("/changepassword")
   public String changePassword() {
     return "user/changepassword";
   }
 
   @RequestMapping(value = "/validateRegister", method = RequestMethod.POST)
-  public Map validateRegister(User user, Model m, RedirectAttributes r, HttpSession session) {
+  @ResponseBody
+  public Map validateRegister(User user, String repeatPassword, Model m, RedirectAttributes r, HttpSession session) {
     log.info("register : {}", user);
+    log.info("repeatPassword : {}", repeatPassword);
 
-    return ImmutableMap.of("status", "1");
+    //验证邮箱
+    //验证电话
+    //验证网址
+    //验证用户是否已经存在
+    User userExisted = userService.getByEmail(user.getEmail());
+    if (userExisted != null) {
+      r.addFlashAttribute("message", "此用户已存在。");
+      return ImmutableMap.of("status", "0", "message", "此用户已存在。");
+    }
+
+    user.setId(DataxUtils.getUUID());
+    setSession(session, user);
+    int status = userService.insert(user);
+
+    return ImmutableMap.of("status", status);
   }
 
   @RequestMapping(value = "/validateLogin", method = RequestMethod.POST)
@@ -95,14 +107,9 @@ public class UserController {
       return ImmutableMap.of("status", "0", "message", "用户名密码不匹配。");
     }
 
-    session.setAttribute("user", user);
-    session.setMaxInactiveInterval(600); //TODO 配置化
+    setSession(session, user);
 
     return ImmutableMap.of("status", "1");
-  }
-
-  private void validateUserInfo(User user) {
-
   }
 
   @RequestMapping("/overview")
@@ -115,6 +122,11 @@ public class UserController {
     m.addAttribute("models", models);
 
     return "user/overview";
+  }
+
+  private void setSession(HttpSession session, User user) {
+    session.setAttribute("user", user);
+    session.setMaxInactiveInterval(600); //TODO 配置化
   }
 
 }

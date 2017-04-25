@@ -31,4 +31,8 @@ public class UserService {
     return userMapper.getByEmail(email);
   }
 
+  public int insert(User user) {
+    return userMapper.insert(user);
+  }
+
 }
