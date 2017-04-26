@@ -18,9 +18,14 @@ public class IndexController {
 
   @RequestMapping("/dash")
   public String dash() {
-    System.out.println("test !!!!");
     return "dashboard";
   }
+
+  @RequestMapping("/model")
+  public String model() {
+    return "model";
+  }
+
 
 
 }

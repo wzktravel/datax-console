@@ -1,102 +1,75 @@
-<div class="box box-primary box-2px ng-scope">
-    <div class="box-header widget-header-blue widget-header-flat">
-        <h4 class="box-title text-info">Cube Designer</h4>
-    </div>
-    <div class="box-body">
-        <div>
-            <ul class="wizard-steps">
-                <!-- ngRepeat: step in wizardSteps --><li ng-repeat="step in wizardSteps" class="complete active">
-                <span style="cursor:pointer;" ng-click="checkCubeForm($index)?goToStep($index):''" class="step ng-binding">1</span>
-                <span class="title ng-binding">Cube Info</span>
-            </li><!-- end ngRepeat: step in wizardSteps --><li ng-repeat="step in wizardSteps" class="">
-                <span style="cursor:pointer;" ng-click="checkCubeForm($index)?goToStep($index):''" class="step ng-binding">2</span>
-                <span class="title ng-binding">Dimensions</span>
-            </li><!-- end ngRepeat: step in wizardSteps --><li ng-repeat="step in wizardSteps" class="">
-                <span style="cursor:pointer;" ng-click="checkCubeForm($index)?goToStep($index):''" class="step ng-binding">3</span>
-                <span class="title ng-binding">Measures</span>
-            </li><!-- end ngRepeat: step in wizardSteps --><li ng-repeat="step in wizardSteps" class="">
-                <span style="cursor:pointer;" ng-click="checkCubeForm($index)?goToStep($index):''" class="step ng-binding">4</span>
-                <span class="title ng-binding">Refresh Setting</span>
-            </li><!-- end ngRepeat: step in wizardSteps --><li ng-repeat="step in wizardSteps" class="">
-                <span style="cursor:pointer;" ng-click="checkCubeForm($index)?goToStep($index):''" class="step ng-binding">5</span>
-                <span class="title ng-binding">Advanced Setting</span>
-            </li><!-- end ngRepeat: step in wizardSteps --><li ng-repeat="step in wizardSteps" class="">
-                <span style="cursor:pointer;" ng-click="checkCubeForm($index)?goToStep($index):''" class="step ng-binding">6</span>
-                <span class="title ng-binding">Configuration Overwrites </span>
-            </li><!-- end ngRepeat: step in wizardSteps --><li ng-repeat="step in wizardSteps" class="">
-                <span style="cursor:pointer;" ng-click="checkCubeForm($index)?goToStep($index):''" class="step ng-binding">7</span>
-                <span class="title ng-binding">Overview</span>
+<head>
+    <link type="text/css" rel="stylesheet" href="${CONTEXT_PATH}/assets/css/styles.min.0.css"/>
+</head>
+<div class="box-header widget-header-blue widget-header-flat">
+    <h4 class="box-title text-info">推荐模型设计器</h4>
+</div>
+<div class="box-body">
+    <div>
+        <ul class="wizard-steps">
+            <li class="active">
+                <span style="cursor:pointer;" class="step ng-binding">1</span>
+                <span class="title ng-binding">补齐企业信息</span>
+            </li>
+            <li class="">
+                <span style="cursor:pointer;" class="step ng-binding">2</span>
+                <span class="title ng-binding">客户名单导入</span>
+            </li>
+            <li class="">
+                <span style="cursor:pointer;" class="step ng-binding">3</span>
+                <span class="title ng-binding">竞品信息导入</span>
+            </li>
+            <li class="">
+                <span style="cursor:pointer;" class="step ng-binding">4</span>
+                <span class="title ng-binding">推荐范围设定</span>
             </li><!-- end ngRepeat: step in wizardSteps -->
-            </ul>
-        </div>
-        <hr>
-        <div class="step-content pos-rel" id="step-container">
-            <!-- ngInclude:  --><div ng-include="" src="curStep.src" class="ng-scope"><!--
-* Licensed to the Apache Software Foundation (ASF) under one
-* or more contributor license agreements.  See the NOTICE file
-* distributed with this work for additional information
-* regarding copyright ownership.  The ASF licenses this file
-* to you under the Apache License, Version 2.0 (the
-* "License"); you may not use this file except in compliance
-* with the License.  You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
--->
+            <li class="">
+                <span style="cursor:pointer;" class="step ng-binding">5</span>
+                <span class="title ng-binding">模型参数设置</span>
+            </li><!-- end ngRepeat: step in wizardSteps -->
+        </ul>
+    </div>
+    <hr/>
+    <div class="step-content pos-rel" id="step-container">
+        <div class="ng-scope">
 
             <div class="row ng-scope">
                 <div class="col-xs-12">
-                    <ng-form name="forms.cube_info_form" novalidate="" class="ng-pristine ng-valid">
+                    <form name="forms.cube_info_form" novalidate="" class="ng-pristine ng-valid">
                         <!--Project-->
-                        <div class="form-group" ng-class="{'required':state.mode=='edit'}">
+                        <div class="form-group">
                             <div class="row">
                                 <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default">
-                                    <b>Model Name</b>
+                                    <b>企业名称</b>
                                 </label>
-                                <div class="col-xs-12 col-sm-6" ng-class="{'has-error':forms.cube_info_form.model_name.$invalid &amp;&amp; (forms.cube_info_form.model_name.$dirty||forms.cube_info_form.model_name.$submitted)}">
-                                    <!-- ngIf: cubeMode=='addNewCube' -->
-
-                                    <!-- ngIf: cubeMode=='editExistCube' -->
-
-                                    <small class="help-block ng-hide" ng-show="forms.cube_info_form.model_name.$error.required &amp;&amp; (forms.cube_info_form.model_name.$dirty||forms.cube_info_form.$submitted)">Model name is required.</small>
-                                    <!-- ngIf: state.mode=='view' --><span ng-if="state.mode=='view'" class="ng-binding ng-scope">nbi_biz_qx_session_weekly_model</span><!-- end ngIf: state.mode=='view' -->
+                                <div class="col-xs-12 col-sm-6">
+                                    <span class="ng-binding ng-scope">攒客科技</span>
                                 </div>
-
-
-
                             </div>
                         </div>
 
                         <!--Cube Name-->
-                        <div class="form-group middle-popover" ng-class="{'required':state.mode=='edit'}">
+                        <div class="form-group middle-popover">
                             <div class="row">
                                 <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default">
-                                    <b>Cube Name</b> <i class="fa fa-info-circle" kylinpopover="" placement="right" title="" template="cubeNameTip.html" data-original-title="Cube Name"></i>
+                                    <b>行业信息</b> <i class="fa fa-info-circle" title=""
+                                                   data-original-title="Cube Name"></i>
                                 </label>
-                                <div class="col-xs-12 col-sm-6" ng-class="{'has-error':forms.cube_info_form.cube_name.$invalid &amp;&amp; (forms.cube_info_form.cube_name.$dirty||forms.cube_info_form.cube_name.$submitted)}">
-                                    <!-- ngIf: state.mode=='edit' -->
-                                    <small class="help-block ng-hide" ng-show="forms.cube_info_form.cube_name.$error.required &amp;&amp; (forms.cube_info_form.cube_name.$dirty||forms.cube_info_form.$submitted)">Cube name is required.</small>
-                                    <small class="help-block ng-hide" ng-show="!forms.cube_info_form.cube_name.$error.required&amp;&amp;forms.cube_info_form.cube_name.$invalid &amp;&amp; (forms.cube_info_form.cube_name.$dirty||forms.cube_info_form.$submitted)">Cube name is invalid.</small>
-
-                                    <!-- ngIf: state.mode=='view' --><span ng-if="state.mode=='view'" class="ng-binding ng-scope">nbi_biz_qx_session_weekly</span><!-- end ngIf: state.mode=='view' -->
+                                <div class="col-xs-12 col-sm-6">
+                                    <small class="help-block ng-hide">Cube name is required.</small>
+                                    <small class="help-block ng-hide">Cube name is invalid.</small>
+                                    <span class="ng-binding ng-scope">nbi_biz_qx_session_weekly</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!--Notification-->
                         <div class="form-group">
                             <div class="row">
                                 <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default">
-                                    <b>Notification Email List</b>
+                                    <b>团队规模</b>
                                 </label>
                                 <div class="col-xs-12 col-sm-6">
-                                    <!-- ngIf: state.mode=='edit' -->
-                                    <!-- ngIf: state.mode=='view' --><span ng-if="state.mode=='view'" class="ng-binding ng-scope">[]</span><!-- end ngIf: state.mode=='view' -->
+                                    <span class="ng-binding ng-scope">[]</span>
                                 </div>
                             </div>
                         </div>
@@ -104,13 +77,12 @@
                         <div class="form-group">
                             <div class="row middle-popover">
                                 <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default">
-                                    <b>Notification Events</b> <i class="fa fa-info-circle" kylinpopover="" placement="right" title="" template="notificationEventsTip.html" data-original-title="Notification Events"></i>
+                                    <b>产品信息</b>
+                                    <i class="fa fa-info-circle" title="" data-original-title="Notification Events"></i>
                                 </label>
                                 <div class="col-xs-12 col-sm-6">
 
-                                    <!-- ngIf: state.mode=='edit' -->
-
-                                    <!-- ngIf: state.mode=='view' --><span ng-if="state.mode=='view'" class="ng-binding ng-scope">["ERROR","DISCARDED","SUCCEED"]</span><!-- end ngIf: state.mode=='view' -->
+                                    <span class="ng-binding ng-scope">["ERROR","DISCARDED","SUCCEED"]</span><!-- end ngIf: state.mode=='view' -->
                                 </div>
                             </div>
                         </div>
@@ -119,48 +91,19 @@
                         <div class="form-group">
                             <div class="row">
                                 <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default">
-                                    <b>Description</b>
+                                    <b></b>
                                 </label>
                                 <div class="col-xs-12 col-sm-6">
-                                    <!-- ngIf: state.mode=='edit' -->
-                                    <!-- ngIf: state.mode=='view' --><span ng-if="state.mode=='view'" class="ng-binding ng-scope"></span><!-- end ngIf: state.mode=='view' -->
+                                    <span class="ng-binding ng-scope"></span>
                                 </div>
                             </div>
                         </div>
-                    </ng-form>
+                    </form>
                 </div>
 
             </div>
-            <script type="text/ng-template" id="cubeNameTip.html" class="ng-scope">
-                <ol>
-                    <li>Cube name is unique name of entire system.</li>
-                    <li>Can not edit cube name after created.</li>
-                </ol>
-            </script>
-            <script type="text/ng-template" id="notificationEventsTip.html" class="ng-scope">
-                <p>ERROR status will trigger a notification anyway.</p>
-            </script>
-        </div>
-        </div>
-        <hr>
-        <div class="wizard-actions">
-            <div class="row">
-                <div class="col-xs-8">
-                    <div>
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <button class="btn btn-prev ng-hide" ng-click="preView()" ng-show="curStep.title!='Cube Info'">
-                        <i class="ace-icon fa fa-arrow-left"></i>
-                        Prev
-                    </button>
-                    <button id="nextButton" class="btn btn-success btn-next" ng-click="checkCubeForm($index)?nextView():''" ng-disabled="forms[curStep.form].$invalid" ng-show="curStep.title!='Overview'">
-                        Next
-                        <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                    </button>
-                    <!-- ngIf: curStep.title=='Overview' && state.mode=='edit' -->
-                </div>
-            </div>
         </div>
     </div>
+    <hr/>
+</div>
 </div>
