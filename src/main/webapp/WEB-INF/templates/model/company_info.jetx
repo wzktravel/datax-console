@@ -1,0 +1,89 @@
+#set(title="推荐模型设计")
+#set(navbar="modelwizard")
+#set(step=2)
+#tag layout_block("bodyContent")
+<div class="container-fluid">
+  <div class="col-lg-1"></div>
+  <div class="col-lg-10">
+    <div class="box-body">
+      <div>
+        #include("wizard-steps.jetx")
+      </div>
+      <hr/>
+      <div class="step-content pos-rel" id="step-container">
+        <div class="ng-scope">
+          <div class="row ng-scope">
+            <div class="col-xs-12">
+              <form name="company_info_form" id="company_info_form" class="ng-pristine ng-valid" action="${CONTEXT_PATH}/model/companyinfo" method="POST">
+                <input type="hidden" id="modelId" name="modelId" value="${model.id}" />
+                <div class="form-group">
+                  <div class="row">
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default" for="company">
+                      <b>企业名称</b>
+                    </label>
+                    <div class="col-xs-12 col-sm-6">
+                      <input id="company" name="company" type="text" class="form-control" value="${companyInfo.company}" />
+                      <!-- <span class="ng-binding ng-scope">[]</span> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group middle-popover">
+                  <div class="row">
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default" for="industry">
+                      <b>行业信息</b>
+                    </label>
+                    <div class="col-xs-12 col-sm-6">
+                      <input id="industry" name="industry" type="text" class="form-control" value="${companyInfo.industry}"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default" for="scale">
+                      <b>人员规模</b>
+                    </label>
+                    <div class="col-xs-12 col-sm-6">
+                      <input id="scale" name="scale" type="text" class="form-control" value="${companyInfo.scale}"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row middle-popover">
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default" for="product">
+                      <b>产品信息</b>
+                    </label>
+                    <div class="col-xs-12 col-sm-6">
+                      <input id="product" name="product" type="text" class="form-control" value="${companyInfo.product}"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default" for="comment">
+                      <b>备注</b>
+                    </label>
+                    <div class="col-xs-12 col-sm-6">
+                      <textarea id="comment" name="comment" type="text" class="form-control" style="height:100px;">${companyInfo.comment}</textarea>
+                    </div>
+                  </div>
+                </div>
+                #include("wizard-actions.jetx")
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+#end
+#tag layout_block("scriptContent")
+<script>
+  $(document).ready(function () {
+    $("#preButton").on("click", function() {
+      window.location = "${CONTEXT_PATH}/model/${model.id}/wizard";
+    });
+  });
+</script>
+#end
+#include("/include/layout.jetx")

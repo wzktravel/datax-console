@@ -1,4 +1,4 @@
-<br>
+<hr>
 <div class="wizard-actions">
   <div class="row">
     <div class="col-xs-8">
@@ -13,7 +13,7 @@
       </button>
       #end
       #if (step < 5)
-      <button #if(model == null)type="submit"#else type="button" id="nextButton" #end class="btn btn-success btn-next">
+      <button type="submit" id="nextButton" class="btn btn-success btn-next">
         Next
         <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
       </button>

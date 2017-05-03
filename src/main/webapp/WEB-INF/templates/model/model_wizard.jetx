@@ -14,14 +14,19 @@
         <div class="ng-scope">
           <div class="row ng-scope">
             <div class="col-xs-12">
-              <form name="model-create-form" class="ng-pristine ng-valid" action="${CONTEXT_PATH}/model/create" method="POST">
+              <form name="model-create-form" id="model-create-form" class="ng-pristine ng-valid" action="${CONTEXT_PATH}/model/create" method="POST">
+                <input type="hidden" id="id" name="id" value="${model.id}" />
                 <div class="form-group">
                   <div class="row">
                     <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default" for="name">
                       <span class="red">*</span><b>模型名称</b>
                     </label>
                     <div class="col-xs-12 col-sm-6">
+                      #if (model == null)
                       <input id="name" name="name" type="text" class="form-control" placeholder="提交后无法修改" maxlength="30" value="${model.name}">
+                      #else
+                      <span class="ng-binding ng-scope" id="name" name="name">${model.name}</span>
+                      #end
                     </div>
                   </div>
                 </div>
@@ -46,12 +51,5 @@
 </div>
 #end
 #tag layout_block("scriptContent")
-<script>
-  $(document).ready(function () {
-    $("#nextButton").on("click", function() {
-      window.location = "${CONTEXT_PATH}/model/${model.id}/basicinfo";
-    })
-  });
-</script>
 #end
 #include("/include/layout.jetx")

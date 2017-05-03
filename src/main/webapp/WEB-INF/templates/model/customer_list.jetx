@@ -1,6 +1,6 @@
 #set(title="推荐模型设计")
 #set(navbar="modelwizard")
-#set(step=2)
+#set(step=3)
 #tag layout_block("bodyContent")
 <div class="container-fluid">
   <div class="col-lg-1"></div>
@@ -14,83 +14,62 @@
         <div class="ng-scope">
           <div class="row ng-scope">
             <div class="col-xs-12">
-              <form name="enterprise_info" id="enterprise_info" class="ng-pristine ng-valid">
+              <form name="company_info_form" id="company_info_form" class="ng-pristine ng-valid" action="${CONTEXT_PATH}/model/companyinfo" method="POST">
+                <input type="hidden" id="modelId" name="modelId" valu="${model.id}" />
                 <div class="form-group">
                   <div class="row">
-                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default">
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default" for="company">
                       <b>企业名称</b>
                     </label>
                     <div class="col-xs-12 col-sm-6">
-                      <input name="company_name" type="text" class="form-control">
-                    <!-- <span class="ng-binding ng-scope">攒客科技</span> -->
+                      <input id="company" name="company" type="text" class="form-control" value="${companyInfo.company}" />
+                      <!-- <span class="ng-binding ng-scope">[]</span> -->
                     </div>
                   </div>
                 </div>
-
                 <div class="form-group middle-popover">
                   <div class="row">
-                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default">
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default" for="industry">
                       <b>行业信息</b>
                     </label>
                     <div class="col-xs-12 col-sm-6">
-                      <span class="ng-binding ng-scope">nbi_biz_qx_session_weekly</span>
+                      <input id="industry" name="industry" type="text" class="form-control" value="${companyInfo.industry}"/>
                     </div>
                   </div>
                 </div>
-
                 <div class="form-group">
                   <div class="row">
-                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default">
-                      <b>团队规模</b>
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default" for="scale">
+                      <b>人员规模</b>
                     </label>
                     <div class="col-xs-12 col-sm-6">
-                      <span class="ng-binding ng-scope">[]</span>
+                      <input id="scale" name="scale" type="text" class="form-control" value="${companyInfo.scale}"/>
                     </div>
                   </div>
                 </div>
-
                 <div class="form-group">
                   <div class="row middle-popover">
-                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default">
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default" for="product">
                       <b>产品信息</b>
                     </label>
                     <div class="col-xs-12 col-sm-6">
-                      <span class="ng-binding ng-scope">["ERROR","DISCARDED","SUCCEED"]</span>
+                      <input id="product" name="product" type="text" class="form-control" value="${companyInfo.product}"/>
                     </div>
                   </div>
                 </div>
-
                 <div class="form-group">
                   <div class="row">
-                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default">
-                      <b>xxxx</b>
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default" for="comment">
+                      <b>备注</b>
                     </label>
                     <div class="col-xs-12 col-sm-6">
-                      <span class="ng-binding ng-scope">xxxx</span>
+                      <textarea id="comment" name="comment" class="form-control" style="height:100px;">${companyInfo.comment}</textarea>
                     </div>
                   </div>
                 </div>
+                #include("wizard-actions.jetx")
               </form>
             </div>
-          </div>
-        </div>
-      </div>
-      <hr/>
-      <div class="wizard-actions">
-        <div class="row">
-          <div class="col-xs-8">
-            <div>
-            </div>
-          </div>
-          <div class="col-xs-4">
-            <button id = "preButton" class="btn btn-prev">
-              <i class="ace-icon fa fa-arrow-left"></i>
-              Prev
-            </button>
-            <button id="nextButton" class="btn btn-success btn-next">
-              Next
-              <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-            </button>
           </div>
         </div>
       </div>
@@ -102,10 +81,7 @@
 <script>
   $(document).ready(function () {
     $("#preButton").on("click", function() {
-      window.location = "${CONTEXT_PATH}/model/${model.id}/wizard";
-    });
-    $("#nextButton").on("click", function() {
-
+      window.location = "${CONTEXT_PATH}/model/${model.id}/companyinfo";
     });
   });
 </script>

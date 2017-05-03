@@ -1,14 +1,14 @@
 <ul class="wizard-steps">
   <li #if(step == 1)class="active"#elseif(step > 1)class="complete"#end>
-    <span class="step ng-binding">1</span>
+    #if(step > 1)<a class="step ng-binding" href="${CONTEXT_PATH}/model/${model.id}/wizard" style="cursor:pointer;">1</a>#else<span class="step ng-binding">1</span>#end
     <span class="title ng-binding">模型基本信息</span>
   </li>
   <li #if(step == 2)class="active"#elseif(step > 2)class="complete"#end>
-    <span class="step ng-binding">2</span>
+    #if(step > 2)<a class="step ng-binding" href="${CONTEXT_PATH}/model/${model.id}/companyinfo" style="cursor:pointer;">2</a>#else<span class="step ng-binding">2</span>#end
     <span class="title ng-binding">补齐企业信息</span>
   </li>
   <li #if(step == 3)class="active"#elseif(step > 3)class="complete"#end>
-    <span class="step ng-binding">3</span>
+    #if(step > 3)<a class="step ng-binding" href="${CONTEXT_PATH}/model/${model.id}/customerlist" style="cursor:pointer;">3</a>#else<span class="step ng-binding">3</span>#end
     <span class="title ng-binding">客户名单导入</span>
   </li>
   <li #if(step == 4)class="active"#elseif(step > 4)class="complete"#end>

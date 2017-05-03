@@ -48,7 +48,10 @@ public class UserController {
   }
 
   @RequestMapping("/login")
-  public String login() {
+  public String login(String url, Model m) {
+    if (!Strings.isNullOrEmpty(url)) {
+      m.addAttribute("url", url);
+    }
     return "user/login";
   }
 

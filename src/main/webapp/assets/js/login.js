@@ -33,9 +33,12 @@ jQuery(document).ready(function () {
                  "password": $('#form_password').val()
                },
                success: function (result) {
-                 console.log(result);
-                 if (result.status == "1") {
-                   window.location.href = contextPath + "/overview";
+                 if (result.status === "1") {
+                   if (url === "") {
+                     window.location.href = contextPath + "/overview";
+                   } else {
+                     window.location.href = contextPath + url;
+                   }
                  } else {
                    $("#form_validate_message").text(result.message).show();
                  }

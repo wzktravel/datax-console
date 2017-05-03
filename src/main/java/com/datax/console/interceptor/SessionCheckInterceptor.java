@@ -9,6 +9,7 @@ import com.github.autoconf.ConfigFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -45,7 +46,7 @@ public class SessionCheckInterceptor extends HandlerInterceptorAdapter {
       User user = (User)request.getSession().getAttribute("user");
       if (user == null) {
         log.info(">>> No session, please login. <<<");
-        response.sendRedirect(request.getContextPath() + "/login");
+        response.sendRedirect(request.getContextPath() + "/login?url=" + URLEncoder.encode(url, "UTF-8"));
         return false;
       }
     }

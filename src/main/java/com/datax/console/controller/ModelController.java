@@ -1,5 +1,8 @@
 package com.datax.console.controller;
 
+import com.google.common.base.Strings;
+
+import com.datax.console.entity.ModelCompanyInfo;
 import com.datax.console.entity.PredictionModel;
 import com.datax.console.entity.User;
 import com.datax.console.helper.DataxUtils;
@@ -43,49 +46,84 @@ public class ModelController {
     return "model/model_wizard";
   }
 
-  @RequestMapping(value = "/create", method = RequestMethod.POST)
-  public String create(String name, String comment, Model m, RedirectAttributes r, HttpSession session) {
-    User user = (User)session.getAttribute("user");
-    String userId = user.getId();
-
-    PredictionModel model = new PredictionModel();
-    model.setUserId(userId);
-    model.setName(name);
-    model.setComment(comment);
-
-    log.info("user id : {}", userId);
-    log.info("model name : {}", name);
-
-    PredictionModel xx = modelService.getByUserAndName(userId, name);
-    if (xx != null) {
-      r.addFlashAttribute("message", "此模型已经存在。");
-      r.addFlashAttribute("model", model);
-      return "redirect:/model/wizard";
-    }
-
-    String id = DataxUtils.getUUID();
-    long now = DataxUtils.getTimeMillis();
-    model.setId(id);
-    model.setDate(now);
-
-    modelService.insert(model);
-
-    r.addFlashAttribute("model", model);
-    return "redirect:/model/" + id + "/basicinfo";
-  }
-
   @RequestMapping("/{id}/wizard")
-  public String modelInfo(@PathVariable String id, Model m, RedirectAttributes r) {
+  public String modelWizard(@PathVariable String id, Model m, RedirectAttributes r) {
     PredictionModel predictionModel = modelService.getById(id);
-    m.addAttribute("model", predictionModel);
+    if (predictionModel == null) {
+      m.addAttribute("message", "此模型不存在。");
+    } else {
+      m.addAttribute("model", predictionModel);
+    }
     return "model/model_wizard";
   }
 
-  @RequestMapping("/{id}/basicinfo")
-  public String basicinfo(@PathVariable String id, Model m, RedirectAttributes r) {
+  @RequestMapping("/{id}/companyinfo")
+  public String companyinfo(@PathVariable String id, Model m, RedirectAttributes r) {
     PredictionModel predictionModel = modelService.getById(id);
-    m.addAttribute("model", predictionModel);
-    return "model/basicinfo";
+    ModelCompanyInfo companyInfo = modelService.getCompanyInfoByModel(id);
+    if (predictionModel == null) {
+      m.addAttribute("message", "此模型不存在。");
+    } else {
+      m.addAttribute("model", predictionModel);
+      m.addAttribute("companyInfo", companyInfo);
+    }
+    return "model/company_info";
   }
 
+  @RequestMapping("/{id}/customerlist")
+  public String customerlist(@PathVariable String id, Model m, RedirectAttributes r) {
+    PredictionModel predictionModel = modelService.getById(id);
+    if (predictionModel == null) {
+      m.addAttribute("message", "此模型不存在。");
+    } else {
+      m.addAttribute("model", predictionModel);
+    }
+    return "model/customer_list";
+  }
+
+  @RequestMapping(value = "/create", method = RequestMethod.POST)
+  public String create(String id, String name, String comment, Model m, RedirectAttributes r, HttpSession session) {
+    if (Strings.isNullOrEmpty(id)) {  //第一次创建
+      User user = (User)session.getAttribute("user");
+      String userId = user.getId();
+
+      PredictionModel model = new PredictionModel();
+      model.setUserId(userId);
+      model.setName(name);
+      model.setComment(comment);
+
+      PredictionModel xx = modelService.getByUserAndName(userId, name);
+      if (xx != null) {
+        r.addFlashAttribute("message", "此模型已经存在。");
+        r.addFlashAttribute("model", model);
+        return "redirect:/model/wizard";
+      }
+
+      String newId = DataxUtils.getUUID();
+      long now = DataxUtils.getTimeMillis();
+      model.setId(newId);
+      model.setDate(now);
+
+      modelService.insert(model);
+      r.addFlashAttribute("model", model);
+      return "redirect:/model/" + newId + "/companyinfo";
+    } else {  // 更新，只能更新comment
+      PredictionModel model = modelService.getById(id);
+      model.setComment(comment);
+      modelService.update(model);
+      r.addFlashAttribute("model", model);
+      return "redirect:/model/" + id + "/companyinfo";
+    }
+  }
+
+  @RequestMapping(value = "/companyinfo", method = RequestMethod.POST)
+  public String addCompanyInfo(ModelCompanyInfo companyInfo, Model m, RedirectAttributes r) {
+    log.info("Model Company Info: {}", companyInfo);
+    String modelId = companyInfo.getModelId();
+    modelService.insertOrUpdateCompanyInfo(companyInfo);
+
+    PredictionModel model = modelService.getById(modelId);
+    r.addFlashAttribute("model", model);
+    return "redirect:/model/" + modelId + "/customerlist";
+  }
 }

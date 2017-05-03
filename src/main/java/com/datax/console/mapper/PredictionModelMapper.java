@@ -5,6 +5,7 @@ import com.github.mybatis.mapper.ICrudMapper;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -19,5 +20,8 @@ public interface PredictionModelMapper extends ICrudMapper<PredictionModel> {
 
   @Select("select * from prediction_model where user_id = #{userId} and name = #{name}")
   PredictionModel getByUserAndName(@Param("userId") String userId, @Param("name") String name);
+
+  @Update("update prediction_model set comment = #{comment} where id = #{id}")
+  @Override int update(PredictionModel model);
 
 }
