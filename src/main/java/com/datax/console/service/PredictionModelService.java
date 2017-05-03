@@ -25,12 +25,20 @@ public class PredictionModelService {
     this.predictionModelMapper = predictionModelMapper;
   }
 
+  public void insert(PredictionModel m) {
+    predictionModelMapper.insert(m);
+  }
+
   public List<PredictionModel> getByUser(String userId) {
     return predictionModelMapper.getByUser(userId);
   }
 
   public PredictionModel getById(String modelId) {
     return predictionModelMapper.findById(modelId);
+  }
+
+  public PredictionModel getByUserAndName(String userId, String name) {
+    return predictionModelMapper.getByUserAndName(userId, name);
   }
 
 }

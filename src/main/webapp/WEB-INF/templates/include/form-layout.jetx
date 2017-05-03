@@ -6,7 +6,8 @@
   <meta name="renderer" content="webkit">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${title}</title>
-  <link href="http://omfzlnj8e.bkt.clouddn.com/style/datatables.min.css" rel="stylesheet" type="text/css"/>
+  <link type="text/css" rel="stylesheet" href="${CONTEXT_PATH}/assets/css/styles.min.0.css"/>
+##  <link href="http://omfzlnj8e.bkt.clouddn.com/style/datatables.min.css" rel="stylesheet" type="text/css"/>
   #tag layout_block_default("headContent")#end
   <style>
     input.error {

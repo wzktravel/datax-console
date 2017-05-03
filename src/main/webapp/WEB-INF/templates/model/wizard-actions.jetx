@@ -1,0 +1,23 @@
+<br>
+<div class="wizard-actions">
+  <div class="row">
+    <div class="col-xs-8">
+      <div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      #if (step > 1)
+      <button type="button" id="preButton" class="btn btn-prev">
+        <i class="ace-icon fa fa-arrow-left"></i>
+        Prev
+      </button>
+      #end
+      #if (step < 5)
+      <button #if(model == null)type="submit"#else type="button" id="nextButton" #end class="btn btn-success btn-next">
+        Next
+        <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+      </button>
+      #end
+    </div>
+  </div>
+</div>

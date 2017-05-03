@@ -9,11 +9,10 @@
   <title>登录</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-  <link rel="stylesheet" href="${CONTEXT_PATH}/assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="${CONTEXT_PATH}/assets/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="${CONTEXT_PATH}/assets/css/form-elements.css">
-  <link rel="stylesheet" href="${CONTEXT_PATH}/assets/css/login.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/css/form-elements.css">
+  <link rel="stylesheet" href="assets/css/login.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,7 +48,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2 text">
-          <h1>登录<strong>DataX</strong></h1>
+          <h1>登录<strong>攒客</strong></h1>
         </div>
       </div>
       <div class="row">
@@ -57,7 +56,7 @@
           <div class="form-top">
             <div class="form-top-left">
               <h3>登录</h3>
-              <p>使用邮箱和密码进行登录：</p>
+              <p>使用邮箱和密码进行登录</p>
             </div>
             <div class="form-top-right">
               <i class="fa fa-key"></i>
@@ -81,6 +80,8 @@
       </div>
       <div class="row">
         <div class="col-sm-6 col-sm-offset-3 social-login">
+          <h4>没有账号？现在进行<a href="${CONTEXT_PATH}/register">注册</a></h4>
+          <!--
           <h3>...或者使用以下登录方式：</h3>
           <div class="social-login-buttons">
             <a class="btn btn-link-1 btn-link-1-facebook" href="#">
@@ -93,6 +94,7 @@
               <i class="fa fa-google-plus"></i> Google Plus
             </a>
           </div>
+          -->
         </div>
       </div>
     </div>

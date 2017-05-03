@@ -17,4 +17,7 @@ public interface PredictionModelMapper extends ICrudMapper<PredictionModel> {
   @Select("select * from prediction_model where user_id = #{userId}")
   List<PredictionModel> getByUser(@Param("userId") String userId);
 
+  @Select("select * from prediction_model where user_id = #{userId} and name = #{name}")
+  PredictionModel getByUserAndName(@Param("userId") String userId, @Param("name") String name);
+
 }

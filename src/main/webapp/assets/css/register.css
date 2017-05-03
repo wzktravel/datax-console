@@ -170,7 +170,7 @@ ul.navbar-nav {
 /***** Top content *****/
 
 .inner-bg {
-    padding: 40px 0 170px 0;
+    padding: 40px 0;
 }
 
 .top-content .text {
@@ -208,7 +208,7 @@ ul.navbar-nav {
 
 .form-top {
     overflow: hidden;
-    padding: 0 25px 15px 25px;
+    padding: 0 25px 0 25px;
     background: #fff;
     -moz-border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px 4px 0 0;
@@ -294,7 +294,7 @@ form.registration-form fieldset {
     }
 
     .inner-bg {
-        padding: 40px 0 110px 0;
+        padding: 40px 0;
     }
 
     .top-content .top-big-link {
@@ -334,4 +334,8 @@ form.registration-form fieldset {
         background-size: 123px 49px !important;
     }
 
+}
+
+.social-login {
+    margin-top: 35px;
 }

@@ -1,3 +1,3 @@
 prediction.result.filter=id,name
 
-ignoredUrls=/login,/logout,/validateLogin,/validateRegister,/register,/changepassword,.css,.gif,.js,.png,.jpg,404.html,.otf,.eot,.svg,.ttf,.woff,.woff2,.less,.scss
+ignoredUrls=/,/login,/logout,/validateLogin,/validateRegister,/register,/changepassword,.css,.gif,.js,.png,.jpg,.html,.otf,.eot,.svg,.ttf,.woff,.woff2,.less,.scss

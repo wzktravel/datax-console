@@ -1,0 +1,57 @@
+#set(title="推荐模型设计")
+#set(navbar="modelwizard")
+#set(step=1)
+#tag layout_block("bodyContent")
+<div class="container-fluid">
+  <div class="col-lg-1"></div>
+  <div class="col-lg-10">
+    <div class="box-body">
+      <div>
+        #include("wizard-steps.jetx")
+      </div>
+      <hr/>
+      <div class="step-content pos-rel" id="step-container">
+        <div class="ng-scope">
+          <div class="row ng-scope">
+            <div class="col-xs-12">
+              <form name="model-create-form" class="ng-pristine ng-valid" action="${CONTEXT_PATH}/model/create" method="POST">
+                <div class="form-group">
+                  <div class="row">
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default" for="name">
+                      <span class="red">*</span><b>模型名称</b>
+                    </label>
+                    <div class="col-xs-12 col-sm-6">
+                      <input id="name" name="name" type="text" class="form-control" placeholder="提交后无法修改" maxlength="30" value="${model.name}">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row middle-popover">
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default" for="comment">
+                      <b>备注</b>
+                    </label>
+                    <div class="col-xs-12 col-sm-6">
+                      <textarea id="comment" name="comment" class="form-control" style="height:100px;" placeholder="模型相关描述，300字以内" maxlength="300">${model.comment}</textarea>
+                    </div>
+                  </div>
+                </div>
+                #include("wizard-actions.jetx")
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+#end
+#tag layout_block("scriptContent")
+<script>
+  $(document).ready(function () {
+    $("#nextButton").on("click", function() {
+      window.location = "${CONTEXT_PATH}/model/${model.id}/basicinfo";
+    })
+  });
+</script>
+#end
+#include("/include/layout.jetx")

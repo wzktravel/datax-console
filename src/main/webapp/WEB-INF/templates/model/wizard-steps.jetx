@@ -1,0 +1,22 @@
+<ul class="wizard-steps">
+  <li #if(step == 1)class="active"#elseif(step > 1)class="complete"#end>
+    <span class="step ng-binding">1</span>
+    <span class="title ng-binding">模型基本信息</span>
+  </li>
+  <li #if(step == 2)class="active"#elseif(step > 2)class="complete"#end>
+    <span class="step ng-binding">2</span>
+    <span class="title ng-binding">补齐企业信息</span>
+  </li>
+  <li #if(step == 3)class="active"#elseif(step > 3)class="complete"#end>
+    <span class="step ng-binding">3</span>
+    <span class="title ng-binding">客户名单导入</span>
+  </li>
+  <li #if(step == 4)class="active"#elseif(step > 4)class="complete"#end>
+    <span class="step ng-binding">4</span>
+    <span class="title ng-binding">竞品信息导入</span>
+  </li>
+  <li #if(step == 5)class="active"#elseif(step > 5)class="complete"#end>
+    <span class="step ng-binding">5</span>
+    <span class="title ng-binding">推荐范围设定</span>
+  </li>
+</ul>

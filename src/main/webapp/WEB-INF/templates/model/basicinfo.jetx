@@ -1,0 +1,113 @@
+#set(title="推荐模型设计")
+#set(navbar="modelwizard")
+#set(step=2)
+#tag layout_block("bodyContent")
+<div class="container-fluid">
+  <div class="col-lg-1"></div>
+  <div class="col-lg-10">
+    <div class="box-body">
+      <div>
+        #include("wizard-steps.jetx")
+      </div>
+      <hr/>
+      <div class="step-content pos-rel" id="step-container">
+        <div class="ng-scope">
+          <div class="row ng-scope">
+            <div class="col-xs-12">
+              <form name="enterprise_info" id="enterprise_info" class="ng-pristine ng-valid">
+                <div class="form-group">
+                  <div class="row">
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default">
+                      <b>企业名称</b>
+                    </label>
+                    <div class="col-xs-12 col-sm-6">
+                      <input name="company_name" type="text" class="form-control">
+                    <!-- <span class="ng-binding ng-scope">攒客科技</span> -->
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group middle-popover">
+                  <div class="row">
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default">
+                      <b>行业信息</b>
+                    </label>
+                    <div class="col-xs-12 col-sm-6">
+                      <span class="ng-binding ng-scope">nbi_biz_qx_session_weekly</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default">
+                      <b>团队规模</b>
+                    </label>
+                    <div class="col-xs-12 col-sm-6">
+                      <span class="ng-binding ng-scope">[]</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="row middle-popover">
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default">
+                      <b>产品信息</b>
+                    </label>
+                    <div class="col-xs-12 col-sm-6">
+                      <span class="ng-binding ng-scope">["ERROR","DISCARDED","SUCCEED"]</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <label class="col-xs-12 col-sm-3 control-label no-padding-right font-color-default">
+                      <b>xxxx</b>
+                    </label>
+                    <div class="col-xs-12 col-sm-6">
+                      <span class="ng-binding ng-scope">xxxx</span>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="wizard-actions">
+        <div class="row">
+          <div class="col-xs-8">
+            <div>
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <button id = "preButton" class="btn btn-prev">
+              <i class="ace-icon fa fa-arrow-left"></i>
+              Prev
+            </button>
+            <button id="nextButton" class="btn btn-success btn-next">
+              Next
+              <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+#end
+#tag layout_block("scriptContent")
+<script>
+  $(document).ready(function () {
+    $("#preButton").on("click", function() {
+      window.location = "${CONTEXT_PATH}/model/${model.id}/wizard";
+    });
+    $("#nextButton").on("click", function() {
+
+    });
+  });
+</script>
+#end
+#include("/include/layout.jetx")

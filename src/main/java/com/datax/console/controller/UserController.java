@@ -126,7 +126,7 @@ public class UserController {
 
   private void setSession(HttpSession session, User user) {
     session.setAttribute("user", user);
-    session.setMaxInactiveInterval(600); //TODO 配置化
+    session.setMaxInactiveInterval(1800); //TODO 配置化
   }
 
 }
